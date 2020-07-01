@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/DanielSalis/App-Ideas-TodoListWithImgs/issues"
   },
-  "homepage": "https://github.com/DanielSalis/App-Ideas-TodoListWithImgs#readme"
+  "homepage": "https://github.com/DanielSalis/App-Ideas-TodoListWithImgs#readme",
+  "dependencies": {}
 }
