@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { FiList } from 'react-icons/fi';
 import { Input, Button } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { LoginContainer, LoginBox } from './style';
-import { primaryTheme, secondaryTheme } from '../../media';
+import { secondaryTheme } from '../../media';
 
 const theme = createMuiTheme({
     overrides: {

@@ -11,7 +11,7 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginBox = styled.div`
-    width:50%;
+    width:40%;
     height:50%;
     background-color: ${primaryTheme};
     border-radius: 5px;
@@ -21,7 +21,8 @@ export const LoginBox = styled.div`
     justify-content:center;
 
     input{
-        height:2em;
+        width: 50%;
+        height:3em;
         outline: none;
         border: none;
         border-radius:2px;
