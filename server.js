@@ -6,6 +6,7 @@ app.use(express.json({ extend: false }));
 
 app.use('/api/users', require('./routes/api/user'));
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
+console.log(PORT);
 
 app.listen(PORT, () => { console.log(`Server on port ${PORT}`) });

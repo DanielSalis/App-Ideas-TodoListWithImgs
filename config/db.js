@@ -1,9 +1,9 @@
-const connectionString = 'postgresql://postgres:postgres@localhost:5432/postgres'
+require('dotenv').config();
 const { Pool } = require('pg');
 
 // ==> Conexão com a Base de Dados:
 const pool = new Pool({
-    connectionString: connectionString
+    connectionString: process.env.DB_CONNECTION_STRING
 });
 
 pool.on('connect', () => {
@@ -11,5 +11,5 @@ pool.on('connect', () => {
 });
 
 module.exports = {
-    query: (text, params) => pool.query(text, params),
+    query: async (text, params) => await pool.query(text, params),
 };
