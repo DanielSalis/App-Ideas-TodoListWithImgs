@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 const db = require('../../config/db');
 
-// @route    POST api/users
+// @route    POST api/users/getAll
 // @desc     Register user
 // @access   Public
 router.get('/getAll', async (request, response) => {
@@ -11,7 +13,7 @@ router.get('/getAll', async (request, response) => {
     response.json(rows);
 });
 
-// @route    POST api/users
+// @route    POST api/users/create
 // @desc     Register user
 // @access   Public
 router.post('/create',
@@ -27,17 +29,21 @@ router.post('/create',
             return response.status(400).json({ errors: errors.array() });
         }
 
-        const { first_name, last_name, email, password, last_login } = request.body;
+        let { first_name, last_name, email, password, last_login } = request.body;
 
         try {
             let query = '';
+            let result = {}
 
             //check if user already exists
             query = `SELECT * from public.user u WHERE u.email = '${email}'`;
-            const result = await db.query(query);
+            result = await db.query(query);
             if (result.rows.length > 0) {
                 return response.status(400).json({ errors: [{ mdg: 'User already exists' }] });
             }
+
+            const salt = await bcrypt.genSalt(5);
+            password = await bcrypt.hash(password, salt);
 
             //add new user
             query = `
@@ -45,9 +51,26 @@ router.post('/create',
                 VALUES ('${first_name}', '${last_name}', '${email}', '${password}', '${last_login}')
             `;
             await db.query(query);
-            response.send('Sucess on Register');
+
+            //getUser Id
+            query = `SELECT * from public.user u WHERE u.email = '${email}'`;
+            result = await db.query(query);
+
+            const payload = {
+                user: {
+                    id: result.rows[0].cd_user
+                }
+            };
+
+            jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2 days' }, (err, token) => {
+                if (err) {
+                    throw err;
+                }
+                return response.status(200).json({ token });
+            });
 
         } catch (error) {
+            console.log(error.message);
             response.status(500).send('Server Error');
         }
     });

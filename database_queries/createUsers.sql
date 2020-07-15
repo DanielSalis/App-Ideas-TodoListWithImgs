@@ -3,6 +3,6 @@ CREATE TABLE public.user(
     first_name VARCHAR (50),
     last_name VARCHAR(50),
     email VARCHAR(200),
-    password VARCHAR(50),
+    password VARCHAR(255),
     last_login TIMESTAMP
 );

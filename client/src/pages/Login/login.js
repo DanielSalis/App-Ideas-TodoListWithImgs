@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FiList } from 'react-icons/fi';
-import { Input, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { LoginContainer, LoginBox } from './style';
 import { secondaryTheme } from '../../media';
@@ -32,6 +32,7 @@ class Login extends Component {
                     <ThemeProvider theme={theme}>
                         <Button disableElevation={true}>login</Button>
                     </ThemeProvider>
+                    <Link to="/register"><p className="text-link"><u>sign up</u></p></Link>
                 </LoginBox>
             </LoginContainer>
         );

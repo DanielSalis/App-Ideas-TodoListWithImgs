@@ -8,7 +8,7 @@ class Header extends Component {
             <HeaderContainer>
                 <HeaderLine />
                 <HeaderContent>
-                    <p>Título</p>
+                    <p>todo app</p>
                     <FiSettings />
                 </HeaderContent>
             </HeaderContainer>

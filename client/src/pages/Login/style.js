@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryTheme, secondaryTheme } from '../../media';
+import { primaryTheme } from '../../media';
 
 export const LoginContainer = styled.div`
     width:100%;
@@ -33,4 +33,11 @@ export const LoginBox = styled.div`
     button{
         margin:0.5em;
     }
+
+    .text-link{
+        color:#fff;
+        font-size: 0.8em;
+        cursor: pointer;
+    }
+
 `;
