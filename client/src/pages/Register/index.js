@@ -2,11 +2,14 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { RegisterContainer, RergisterBox } from './style';
+import { useHistory } from "react-router-dom";
 import { secondaryTheme } from '../../media';
 
 import api from '../../components/Api';
 
+
 const theme = createMuiTheme({
+
     overrides: {
         MuiButton: {
             // Name of the rule
@@ -24,13 +27,14 @@ const theme = createMuiTheme({
 });
 
 const initialFormData = {
-    name: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: ""
 }
 
 const Register = () => {
+    let history = useHistory();
 
     const [formData, updateFormData] = React.useState(initialFormData)
 
@@ -44,16 +48,18 @@ const Register = () => {
     const handleSubmmit = async (e) => {
         e.preventDefault();
         const res = await api.post('/users/create', formData);
-        console.log(res);
-        console.log(formData);
+        localStorage.setItem('authToken', res.data.token)
+        history.push('/todo');
+        console.log(res.data);
+
     }
 
     return (
         <RegisterContainer>
             <RergisterBox>
                 <div className="nameContainer">
-                    <input type="text" name="name" onChange={handleInputChange} placeholder="Name"></input>
-                    <input type="text" name="lastName" onChange={handleInputChange} placeholder="Last Name"></input>
+                    <input type="text" name="first_name" onChange={handleInputChange} placeholder="Name"></input>
+                    <input type="text" name="last_name" onChange={handleInputChange} placeholder="Last Name"></input>
                 </div>
                 <input type="text" name="email" onChange={handleInputChange} placeholder="Email"></input>
                 <input type="password" name="password" onChange={handleInputChange} placeholder="Password"></input>

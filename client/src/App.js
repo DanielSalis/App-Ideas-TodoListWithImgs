@@ -7,11 +7,12 @@ import {
 import { PrivateRoute } from './components/PrivateRoute';
 import Login from './pages/Login/login';
 import './style.css';
+
 import Header from './components/Header';
 import Register from './pages/Register';
+import ToDo from './pages/ToDo';
 
 function App() {
-  console.log(process.env);
   return (
     <div className="App">
       <Router>
@@ -19,8 +20,8 @@ function App() {
         <div className="pageContent">
           <Switch>
             <Route exact path="/"><Login /></Route>
-            <Route path="/register"><Register /></Route>
-            {/* <Route exact path="" component={} /> */}
+            <Route exact path="/register"><Register /></Route>
+            <PrivateRoute exact path="/todo" component={ToDo} />
           </Switch>
         </div>
       </Router>

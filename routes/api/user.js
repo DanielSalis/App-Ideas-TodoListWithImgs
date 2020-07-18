@@ -1,4 +1,5 @@
 const express = require('express');
+let moment = require('moment');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -29,7 +30,8 @@ router.post('/create',
             return response.status(400).json({ errors: errors.array() });
         }
 
-        let { first_name, last_name, email, password, last_login } = request.body;
+        let { first_name, last_name, email, password } = request.body;
+        let last_login = await moment().format('YYYY-MM-DD HH:mm:ss');
 
         try {
             let query = '';
