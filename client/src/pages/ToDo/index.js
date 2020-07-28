@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import { ToDoContainer } from './style';
 
 class ToDo extends Component {
     render() {
         return (
-            <div>TO DO</div>
+            <ToDoContainer>
+                <div>
+                    <input placeholder="Title"></input>
+                    <input placeholder="Description"></input>
+                    <textarea rows="5" cols="33" style={{ resize: 'none' }}></textarea>
+                </div>
+            </ToDoContainer>
         );
     }
 }
