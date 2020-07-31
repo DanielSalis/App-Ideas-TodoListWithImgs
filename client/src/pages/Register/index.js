@@ -47,11 +47,16 @@ const Register = () => {
 
     const handleSubmmit = async (e) => {
         e.preventDefault();
-        const res = await api.post('/users/create', formData);
-        localStorage.setItem('authToken', res.data.token)
-        history.push('/todo');
-        console.log(res.data);
-
+        await api.post('/users/create', formData)
+            .then(async (res) => {
+                await alert('Cadastrado com sucesso')
+                localStorage.setItem('authToken', res.data.token)
+                console.log(res.data);
+                history.push('/todo');
+            })
+            .catch(() => {
+                alert('Erro ao Cadastrar');
+            });
     }
 
     return (

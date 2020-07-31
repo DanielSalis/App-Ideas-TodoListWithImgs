@@ -70,6 +70,7 @@ export const HeaderContent = styled.div`
     .dropdown-content span:hover {
         background-color: ${secondaryTheme};
         color:#fff;
+        cursor: pointer;
     }
 
     .dropdown:hover .dropdown-content {
