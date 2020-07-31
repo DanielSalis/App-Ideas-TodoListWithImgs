@@ -45,10 +45,19 @@ const Login = () => {
     const handleSubmmit = async (e) => {
         e.preventDefault();
         await api.post('/auth/', formData)
-            .then((res) => {
+            .then(async (res) => {
                 localStorage.setItem('authToken', res.data.token);
                 history.push('/todo');
-                console.log(res, res.data);
+
+                await api.get('/auth', {
+                    headers: {
+                        'x-auth-token': localStorage.getItem('authToken')
+                    }
+                })
+                    .then((res) => {
+                        console.log(res.data)
+                        localStorage.setItem('userLogged', JSON.stringify(res.data));
+                    })
             })
             .catch(() => {
                 alert('Invalid Credentials');
