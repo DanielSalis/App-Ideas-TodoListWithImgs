@@ -6,6 +6,10 @@ import { LoginContainer, LoginBox } from './style';
 import { secondaryTheme } from '../../media';
 import { useHistory } from 'react-router-dom';
 
+import { bindActionCreators } from 'redux';
+import { Actions as AuthActions } from '../../store/ducks/auth';
+import { connect } from 'react-redux';
+
 import api from '../../components/Api';
 
 const theme = createMuiTheme({
@@ -30,7 +34,7 @@ const initialFormData = {
     password: ''
 }
 
-const Login = () => {
+const Login = (props) => {
     let history = useHistory();
 
     const [formData, updateFormData] = React.useState(initialFormData);
@@ -43,20 +47,22 @@ const Login = () => {
     }
 
     const handleSubmmit = async (e) => {
+        console.log(props);
+
         e.preventDefault();
         await api.post('/auth/', formData)
             .then(async (res) => {
                 localStorage.setItem('authToken', res.data.token);
-                history.push('/todo');
-
                 await api.get('/auth', {
                     headers: {
                         'x-auth-token': localStorage.getItem('authToken')
                     }
                 })
-                    .then((res) => {
-                        console.log(res.data)
+                    .then(async (res) => {
+                        console.log(res.data);
                         localStorage.setItem('userLogged', JSON.stringify(res.data));
+                        await props.AuthActions.loginSuccess(res.data);
+                        history.push('/todo');
                     })
             })
             .catch(() => {
@@ -78,4 +84,12 @@ const Login = () => {
     );
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+    AuthActions: bindActionCreators(AuthActions, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

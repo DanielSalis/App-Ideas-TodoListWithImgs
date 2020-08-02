@@ -84,11 +84,11 @@ router.post('/',
                 if (err) {
                     throw err;
                 }
-                res.json({ token });
+                return res.json({ token });
             })
 
         } catch (error) {
-            console.error(err.message);
+            console.error(error.message);
             return res.status(500).send('Server error');
         }
     }
