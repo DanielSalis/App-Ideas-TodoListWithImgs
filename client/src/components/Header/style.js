@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { media, primaryTheme, secondaryTheme } from '../../media';
+import { secondaryTheme } from '../../media';
 
 export const HeaderContainer = styled.div`
     width: 100%;

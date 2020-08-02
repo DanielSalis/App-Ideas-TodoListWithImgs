@@ -9,7 +9,7 @@ import Login from './pages/Login/login';
 import './style.css';
 import Header from './components/Header';
 import Register from './pages/Register';
-import ToDo from './pages/ToDo';
+import MainApp from './pages/App';
 
 import store from './store';
 import { Provider } from 'react-redux';
@@ -25,7 +25,7 @@ function App() {
             <Switch>
               <Route exact path="/"><Login /></Route>
               <Route exact path="/register"><Register /></Route>
-              <PrivateRoute exact path="/todo" component={ToDo} />
+              <PrivateRoute exact path="/todo" component={MainApp} />
             </Switch>
           </div>
         </Router>
