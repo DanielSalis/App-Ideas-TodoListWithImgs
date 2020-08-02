@@ -20,7 +20,6 @@ const ToDo = (props) => {
             {open &&
                 <textarea>{text}</textarea>
             }
-
             {open &&
                 <ButtonsContainer>
                     <Button variant="outlined" disableElevation={true} style={{ borderColor: secondaryTheme, color: secondaryTheme }}>Save</Button>
