@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ToDoContainer, ToDoStatusBar } from './style';
+import { ToDoContainer } from './style';
 import ToDo from '../../components/ToDo';
 import api from '../../components/Api';
 

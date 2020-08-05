@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { media, primaryTheme, secondaryTheme } from '../../media';
 
 export const Container = styled.div`
     transition: 0.4s;
