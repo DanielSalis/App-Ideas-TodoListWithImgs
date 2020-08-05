@@ -51,7 +51,6 @@ const Register = () => {
             .then(async (res) => {
                 await alert('Cadastrado com sucesso')
                 localStorage.setItem('authToken', res.data.token)
-                console.log(res.data);
                 history.push('/todo');
             })
             .catch(() => {

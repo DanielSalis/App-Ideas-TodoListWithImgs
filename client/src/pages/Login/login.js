@@ -47,8 +47,6 @@ const Login = (props) => {
     }
 
     const handleSubmmit = async (e) => {
-        console.log(props);
-
         e.preventDefault();
         await api.post('/auth/', formData)
             .then(async (res) => {
@@ -59,7 +57,6 @@ const Login = (props) => {
                     }
                 })
                     .then(async (res) => {
-                        console.log(res.data);
                         localStorage.setItem('userLogged', JSON.stringify(res.data));
                         await props.AuthActions.loginSuccess(res.data);
                         history.push('/todo');
@@ -85,11 +82,11 @@ const Login = (props) => {
 }
 
 const mapStateToProps = state => ({
-    user: state.user
+    auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
     AuthActions: bindActionCreators(AuthActions, dispatch)
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
